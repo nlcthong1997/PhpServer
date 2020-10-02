@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\User;
+use App\Http\Controllers\Controller;
+use App\Http\Rules\Register;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,20 +31,23 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        if ($request->only('email')) {
+        try {
+            $validator = Validator::make($request->all(), Register::rules(), Register::messages());
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 400);
+            }
 
-        }
-        $data = $request->only('name', 'email', 'password');
-        $user = User::create([
-            'name' => $data['name'] ?? $data['email'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        if ($user) {
+            $username =  explode('@', $request->input('email'))[0];
+            User::create([
+                'username' => $username,
+                'nick_name' => $request->input('nick_name') ?? $username,
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+            ]);
             return response()->json(['success' => 'Registed successfull'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Register error'], 401);
         }
-        return response()->json(['error' => 'Register error'], 401);
     }
 
     /**
@@ -62,6 +66,16 @@ class AuthController extends Controller
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    /**
+     * Get the authenticated User
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function userInfo()
+    {
+        return response()->json($this->guard()->user());
     }
 
     /**
@@ -110,15 +124,5 @@ class AuthController extends Controller
     public function guard()
     {
         return Auth::guard();
-    }
-
-     /**
-     * Get the authenticated User
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json($this->guard()->user());
     }
 }

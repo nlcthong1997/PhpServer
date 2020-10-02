@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable(true);
             $table->text('url_img')->nullable(true);
             $table->enum('role', ['Admin', 'Normal'])->default('Normal');
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable(true);
             $table->timestamps();
         });
     }

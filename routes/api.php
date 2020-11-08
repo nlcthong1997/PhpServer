@@ -23,4 +23,5 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('user-info', 'AuthController@userInfo');
 
     Route::get('test', 'TestController@test');
+    Route::get('users', 'TestController@users');
 });

@@ -4,13 +4,18 @@ namespace App;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+// use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+// class User extends Eloquent implements JWTSubject
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    protected $connection = 'mongodb';
     /**
      * The attributes that are mass assignable.
      *

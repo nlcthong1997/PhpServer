@@ -16,6 +16,7 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
+    // 'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,6 +42,24 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        ],
+
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'host' => env('MONGO_HOST', '127.0.0.1'),
+            'port' => env('MONGO_PORT', 27017),
+            'database' => env('MONGO_DATABASE'),
+            'username' => env('MONGO_USERNAME'),
+            'password' => env('MONGO_PASSWORD'),
+            'options' => [
+                'database' => env('MONGO_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo ^3.0
+            ],
+        ],
+
+        'mongodb_atlas' => [
+            'driver' => 'mongodb',
+            'dsn' => 'mongodb+srv://' . env('MONGO_USERNAME') . ':' . env('MONGO_PASSWORD') . '@' . env('MONGO_HOST') . '/' . env('MONGO_DATABASE') . '?retryWrites=true&w=majority',
+            'database' => env('MONGO_DATABASE'),
         ],
 
         'mysql' => [

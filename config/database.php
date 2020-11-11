@@ -46,20 +46,20 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'host' => env('MONGO_HOST', '127.0.0.1'),
-            'port' => env('MONGO_PORT', 27017),
-            'database' => env('MONGO_DATABASE'),
-            'username' => env('MONGO_USERNAME'),
-            'password' => env('MONGO_PASSWORD'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', 27017),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'options' => [
-                'database' => env('MONGO_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo ^3.0
+                'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo ^3.0
             ],
         ],
 
         'mongodb_atlas' => [
             'driver' => 'mongodb',
-            'dsn' => 'mongodb+srv://' . env('MONGO_USERNAME') . ':' . env('MONGO_PASSWORD') . '@' . env('MONGO_HOST') . '/' . env('MONGO_DATABASE') . '?retryWrites=true&w=majority',
-            'database' => env('MONGO_DATABASE'),
+            'dsn' => 'mongodb+srv://' . env('DB_USERNAME') . ':' . env('DB_PASSWORD') . '@' . env('DB_HOST') . '/' . env('DB_DATABASE') . '?retryWrites=true&w=majority',
+            'database' => env('DB_DATABASE'),
         ],
 
         'mysql' => [

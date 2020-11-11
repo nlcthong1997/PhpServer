@@ -15,7 +15,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    protected $connection = 'mongodb';
+    //protected $connection = 'mongodb_atlas'; // mongodb || mysql || empty
     /**
      * The attributes that are mass assignable.
      *

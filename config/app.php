@@ -161,6 +161,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+        //Json web token
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*

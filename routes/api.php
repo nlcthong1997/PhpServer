@@ -14,14 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'v1'], function () {
-    
-    Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
-
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('user-info', 'AuthController@userInfo');
-
-    Route::get('test', 'TestController@test');
-    Route::get('users', 'TestController@users');
+    Route::post('login', ['uses' => 'Api\Auth\LoginController@login']);
+    Route::get('logout', ['uses' => 'Api\Auth\LoginController@logout']);
+    Route::post('register', ['uses' => 'Api\Auth\LoginController@register']);
+    Route::get('user', ['uses' => 'Api\Auth\LoginController@user']);
 });

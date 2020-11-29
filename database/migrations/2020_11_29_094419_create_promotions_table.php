@@ -18,7 +18,7 @@ class CreatePromotionsTable extends Migration
             $table->text('name')->default('Promotion');
             $table->decimal('discount')->nullable(false)->default(0.00);
             $table->text('description')->nullable(true);
-            $table->boolean('active')->default(true);
+            $table->boolean('active')->nullable(false)->default(true);
             $table->timestamps();
         });
     }

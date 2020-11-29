@@ -15,10 +15,10 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('categories_id')->nullable(false)->default(0);
+            $table->string('category_id')->nullable(false)->default('');
             $table->string('name', 255)->nullable(false)->default('Not name ???');
             $table->json('url_imgs')->nullable(true);
-            $table->decimal('price', 8, 2)->default(0.00);
+            $table->decimal('price', 8, 2)->nullable(false)->default(0.00);
             $table->timestamps();
         });
     }

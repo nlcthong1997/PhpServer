@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
-class Orders extends Model
+class Order extends Model
 {
+    protected $collection = 'orders';
+
+    // protected $primaryKey = 'id';
+
     protected $fillable = ['id', 'phone', 'email', 'address', 'description', 'order_total', 'status'];
 
     public $timestamps = true;

@@ -15,11 +15,11 @@ class CreateOrdersDetailTable extends Migration
     {
         Schema::create('orders_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('order_id')->nullable(false)->default(0);
-            $table->integer('product_id')->nullable(false)->default(0);
-            $table->integer('category_id')->nullable(false)->default(0);
+            $table->string('order_id')->nullable(false)->default('');
+            $table->string('product_id')->nullable(false)->default('');
+            $table->string('category_id')->nullable(false)->default('');
             $table->integer('qty')->nullable(false)->default(0);
-            $table->decimal('total', 8, 2)->default(0.00);
+            $table->decimal('total', 8, 2)->nullable(false)->default(0.00);
             $table->timestamps();
         });
     }

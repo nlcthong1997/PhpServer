@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('email')->nullable(false);
             $table->text('address')->nullable(false);
             $table->text('description')->nullable(true);
-            $table->decimal('order_total', 8, 2)->default(0.00);
+            $table->decimal('order_total', 8, 2)->nullable(false)->default(0.00);
             $table->enum('status', ['Paid', 'Cancelled', 'Shipping'])->default('Shipping');
             $table->timestamps();
         });
